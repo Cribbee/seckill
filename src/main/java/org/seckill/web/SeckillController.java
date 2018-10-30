@@ -33,7 +33,7 @@ public class SeckillController {
     @Autowired
     private SeckillService seckillService;
 
-    @RequestMapping(name = "/list", method = RequestMethod.GET)
+    @RequestMapping( value = "/list", method = RequestMethod.GET)
     public String list(Model model){
         //list.jsp(模板) + model(数据) = ModelAndView
         //获取列表页--调用Service
@@ -57,10 +57,11 @@ public class SeckillController {
 
     //ajax json
 
-    @RequestMapping(value = "/{seckillId}/exposer", method = RequestMethod.POST, produces = {
-            "application/json; charset=UTF-8" })
-    public SeckillResult<Exposer> exposer(Long seckillId){
-
+    @RequestMapping(value = "/{seckillId}/exposer",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8" })
+    @ResponseBody
+    public SeckillResult<Exposer> exposer(@PathVariable Long seckillId){
         SeckillResult<Exposer> result;
         try {
             Exposer exposer = seckillService.exportSeckillUrl(seckillId);
