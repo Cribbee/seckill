@@ -113,9 +113,12 @@ public class SeckillServiceImpl implements SeckillService {
         try {
             //记录购买行为
             int insertCount = successKilledDao.insertSuccessKilled(seckillId, userPhone);
+            int x = 1;
+            System.out.println(x);
             if (insertCount <= 0) {
                 //重复秒杀
                 throw new RepeatKillException("seckill repeated");
+
 
             } else {
                 //减库存，调整顺序之后
