@@ -114,6 +114,7 @@ public class SeckillServiceImpl implements SeckillService {
             //记录购买行为
             int insertCount = successKilledDao.insertSuccessKilled(seckillId, userPhone);
             int x = 1;
+            x=x+1;
             System.out.println(x);
             if (insertCount <= 0) {
                 //重复秒杀
