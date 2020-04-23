@@ -118,7 +118,7 @@ public class SeckillServiceImpl implements SeckillService {
                 throw new RepeatKillException("seckill repeated");
 
             } else {
-                //减库存
+                //减库存，调整顺序之后
                 int updateCount = seckillDao.reduceNumber(seckillId, nowTime);
                 if (updateCount <= 0) {
                     //没有更新记录，秒杀结束,rollback

@@ -1,5 +1,8 @@
 package org.seckill.web;
 
+import org.apache.skywalking.apm.toolkit.trace.ActiveSpan;
+import org.apache.skywalking.apm.toolkit.trace.Trace;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.seckill.dto.Exposer;
 import org.seckill.dto.SeckillExecution;
 import org.seckill.dto.SeckillResult;
@@ -33,11 +36,16 @@ public class SeckillController {
     @Autowired
     private SeckillService seckillService;
 
+    @Trace
     @RequestMapping( value = "/list", method = RequestMethod.GET)
     public String list(Model model){
         //list.jsp(模板) + model(数据) = ModelAndView
         //获取列表页--调用Service
         List<Seckill> list = seckillService.getSeckillList();
+        ActiveSpan.tag("my_tag", "print Seckill list: " + list.toString() + "traceId= "+  TraceContext.traceId());
+        test1.trans();
+
+
         model.addAttribute("list",list);
         return "list";// /WEB-INF/jsp/"list".jsp
     }
